@@ -7,7 +7,7 @@ sealed class AppScreens(val route: String) {
     object Locations : AppScreens("locations")
     object Irrigation : AppScreens("irrigation")
 
-    // Para pasar parámetros
+
     object WeatherDetail : AppScreens("weather_detail/{locationName}") {
         fun createRoute(locationName: String) = "weather_detail/$locationName"
     }

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -15,12 +16,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.edwindiaz.agroclima.features.agroclima.presentation.viewmodels.WeatherViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IrrigationScreen(
-    factory: WeatherViewModelFactory,
     onNavigateBack: () -> Unit
 ) {
     Scaffold(
@@ -28,11 +27,8 @@ fun IrrigationScreen(
             TopAppBar(
                 title = { Text("💧 Calculadora de Riego") },
                 navigationIcon = {
-                    androidx.compose.material3.IconButton(onClick = onNavigateBack) {
-                        androidx.compose.material3.Icon(
-                            painter = androidx.compose.ui.res.painterResource(android.R.drawable.ic_menu_revert),
-                            contentDescription = "Volver"
-                        )
+                    IconButton(onClick = onNavigateBack) {
+                        Text(text = "←", style = MaterialTheme.typography.headlineMedium)
                     }
                 }
             )

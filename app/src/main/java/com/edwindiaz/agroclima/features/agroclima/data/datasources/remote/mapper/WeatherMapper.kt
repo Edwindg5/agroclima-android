@@ -13,9 +13,9 @@ fun WeatherResponseDto.toDomain(): Weather {
             longitude = this.coord.lon
         ),
         temperature = this.main.temp,
-        feelsLike = this.main.feelsLike,        // Cambio aquí
-        minTemperature = this.main.tempMin,     // Cambio aquí
-        maxTemperature = this.main.tempMax,     // Cambio aquí
+        feelsLike = this.main.feelsLike,
+        minTemperature = this.main.tempMin,
+        maxTemperature = this.main.tempMax,
         humidity = this.main.humidity,
         pressure = this.main.pressure,
         windSpeed = this.wind.speed,

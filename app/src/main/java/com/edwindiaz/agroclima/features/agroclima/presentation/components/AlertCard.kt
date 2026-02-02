@@ -1,26 +1,13 @@
 //features/agroclima/presentation/components/AlertCard.kt
 package com.edwindiaz.agroclima.features.agroclima.presentation.components
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.edwindiaz.agroclima.features.agroclima.domain.entities.AlertType
@@ -31,26 +18,26 @@ fun AlertCard(
     alert: WeatherAlert,
     modifier: Modifier = Modifier
 ) {
-    val (backgroundColor, iconColor, icon) = when (alert.type) {
+    val (backgroundColor, iconColor, emoji) = when (alert.type) {
         AlertType.FROST -> Triple(
-            Color(0xFFE3F2FD), // Azul claro
-            Color(0xFF2196F3), // Azul
-            painterResource(android.R.drawable.ic_menu_compass)
+            Color(0xFFE3F2FD),
+            Color(0xFF2196F3),
+            "❄️"
         )
         AlertType.WIND -> Triple(
-            Color(0xFFF3E5F5), // Lila claro
-            Color(0xFF9C27B0), // Lila
-            painterResource(android.R.drawable.ic_lock_idle_alarm)
+            Color(0xFFF3E5F5),
+            Color(0xFF9C27B0),
+            "💨"
         )
         AlertType.OPTIMAL -> Triple(
-            Color(0xFFE8F5E8), // Verde claro
-            Color(0xFF4CAF50), // Verde
-            painterResource(android.R.drawable.ic_menu_save)
+            Color(0xFFE8F5E8),
+            Color(0xFF4CAF50),
+            "✅"
         )
         else -> Triple(
-            Color(0xFFFFF3E0), // Naranja claro
-            Color(0xFFFF9800), // Naranja
-            painterResource(android.R.drawable.ic_dialog_alert)
+            Color(0xFFFFF3E0),
+            Color(0xFFFF9800),
+            "⚠️"
         )
     }
 
@@ -77,11 +64,10 @@ fun AlertCard(
                 .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                painter = icon,
-                contentDescription = alert.type.name,
-                modifier = Modifier.size(32.dp),
-                tint = iconColor
+            Text(
+                text = emoji,
+                style = MaterialTheme.typography.headlineMedium,
+                modifier = Modifier.size(32.dp)
             )
 
             Spacer(modifier = Modifier.width(12.dp))

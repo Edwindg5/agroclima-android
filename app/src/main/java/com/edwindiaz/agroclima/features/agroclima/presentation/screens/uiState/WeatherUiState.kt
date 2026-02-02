@@ -1,3 +1,4 @@
+//features/agroclima/presentation/screens/uiState/WeatherUiState.kt
 package com.edwindiaz.agroclima.features.agroclima.presentation.screens.uiState
 
 import com.edwindiaz.agroclima.features.agroclima.domain.entities.Location

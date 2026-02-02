@@ -6,7 +6,7 @@ import com.edwindiaz.agroclima.features.agroclima.domain.entities.Weather
 import com.edwindiaz.agroclima.features.agroclima.domain.repositories.WeatherRepository
 
 class GetCurrentWeatherUseCase(
-    private val repository: WeatherRepository
+     private val repository: WeatherRepository
 ) {
     suspend operator fun invoke(location: Location): Result<Weather> {
         return try {

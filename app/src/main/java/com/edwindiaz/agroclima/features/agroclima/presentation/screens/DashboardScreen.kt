@@ -34,7 +34,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.edwindiaz.agroclima.features.agroclima.domain.entities.ChiapasLocations
+import com.edwindiaz.agroclima.features.agroclima.data.datasources.local.ChiapasLocations
 import com.edwindiaz.agroclima.features.agroclima.presentation.components.AlertCard
 import com.edwindiaz.agroclima.features.agroclima.presentation.components.IrrigationCalculatorCard
 import com.edwindiaz.agroclima.features.agroclima.presentation.components.WeatherCard
@@ -45,19 +45,18 @@ import com.edwindiaz.agroclima.features.agroclima.presentation.viewmodels.Weathe
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen(
-    factory: WeatherViewModelFactory,
+    viewModel: WeatherViewModel,
     onNavigateToForecast: () -> Unit,
     onNavigateToLocations: () -> Unit,
     onNavigateToIrrigation: () -> Unit
 ) {
 
 
-    val viewModel: WeatherViewModel = viewModel(factory = factory)
+
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
         if (uiState.selectedLocation == null) {
-            // Si no hay ubicación seleccionada, usa la primera de Chiapas
             viewModel.selectLocation(ChiapasLocations.locations.first())
         } else if (uiState.weather == null && !uiState.isLoading) {
             viewModel.loadWeather()
@@ -158,10 +157,7 @@ fun BottomNavigationBar(
     ) {
         NavigationBarItem(
             icon = {
-                Icon(
-                    painter = painterResource(android.R.drawable.ic_menu_compass),
-                    contentDescription = "Dashboard"
-                )
+                Text(text = "🏠", style = MaterialTheme.typography.headlineSmall)
             },
             label = { Text("Inicio") },
             selected = true,
@@ -170,10 +166,7 @@ fun BottomNavigationBar(
 
         NavigationBarItem(
             icon = {
-                Icon(
-                    painter = painterResource(android.R.drawable.ic_menu_my_calendar),
-                    contentDescription = "Pronóstico"
-                )
+                Text(text = "📅", style = MaterialTheme.typography.headlineSmall)
             },
             label = { Text("Pronóstico") },
             selected = false,
@@ -182,10 +175,7 @@ fun BottomNavigationBar(
 
         NavigationBarItem(
             icon = {
-                Icon(
-                    painter = painterResource(android.R.drawable.ic_menu_mapmode),
-                    contentDescription = "Ubicaciones"
-                )
+                Text(text = "📍", style = MaterialTheme.typography.headlineSmall)
             },
             label = { Text("Ubicaciones") },
             selected = false,
@@ -194,10 +184,7 @@ fun BottomNavigationBar(
 
         NavigationBarItem(
             icon = {
-                Icon(
-                    painter = painterResource(android.R.drawable.ic_menu_compass),
-                    contentDescription = "Riego"
-                )
+                Text(text = "💧", style = MaterialTheme.typography.headlineSmall)
             },
             label = { Text("Riego") },
             selected = false,

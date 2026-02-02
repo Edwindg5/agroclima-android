@@ -1,4 +1,6 @@
-package com.edwindiaz.agroclima.features.agroclima.domain.entities
+package com.edwindiaz.agroclima.features.agroclima.data.datasources.local
+
+import com.edwindiaz.agroclima.features.agroclima.domain.entities.Location
 
 object ChiapasLocations {
     val locations = listOf(

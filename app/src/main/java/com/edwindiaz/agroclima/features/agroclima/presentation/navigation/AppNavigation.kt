@@ -3,6 +3,7 @@ package com.edwindiaz.agroclima.features.agroclima.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,6 +12,7 @@ import com.edwindiaz.agroclima.features.agroclima.presentation.screens.Dashboard
 import com.edwindiaz.agroclima.features.agroclima.presentation.screens.ForecastScreen
 import com.edwindiaz.agroclima.features.agroclima.presentation.screens.IrrigationScreen
 import com.edwindiaz.agroclima.features.agroclima.presentation.screens.LocationsScreen
+import com.edwindiaz.agroclima.features.agroclima.presentation.viewmodels.WeatherViewModel
 import com.edwindiaz.agroclima.features.agroclima.presentation.viewmodels.WeatherViewModelFactory
 
 @Composable
@@ -19,13 +21,17 @@ fun AppNavigation(
     navController: NavHostController = rememberNavController()
 ) {
 
+    val weatherViewModel: WeatherViewModel = remember {
+        factory.create(WeatherViewModel::class.java)
+    }
+
     NavHost(
         navController = navController,
         startDestination = AppScreens.Dashboard.route
     ) {
         composable(AppScreens.Dashboard.route) {
             DashboardScreen(
-                factory = factory,
+                viewModel = weatherViewModel,
                 onNavigateToForecast = {
                     navController.navigate(AppScreens.Forecast.route)
                 },
@@ -47,14 +53,13 @@ fun AppNavigation(
 
         composable(AppScreens.Locations.route) {
             LocationsScreen(
-                factory = factory,
+                viewModel = weatherViewModel,
                 onNavigateBack = { navController.popBackStack() }
             )
         }
 
         composable(AppScreens.Irrigation.route) {
             IrrigationScreen(
-                factory = factory,
                 onNavigateBack = { navController.popBackStack() }
             )
         }

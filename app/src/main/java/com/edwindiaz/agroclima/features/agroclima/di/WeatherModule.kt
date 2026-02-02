@@ -6,6 +6,7 @@ import com.edwindiaz.agroclima.features.agroclima.domain.usecases.CalculateIrrig
 import com.edwindiaz.agroclima.features.agroclima.domain.usecases.CheckFrostAlertUseCase
 import com.edwindiaz.agroclima.features.agroclima.domain.usecases.CheckWindAlertUseCase
 import com.edwindiaz.agroclima.features.agroclima.domain.usecases.GetCurrentWeatherUseCase
+import com.edwindiaz.agroclima.features.agroclima.domain.usecases.GetForecastUseCase
 import com.edwindiaz.agroclima.features.agroclima.presentation.viewmodels.WeatherViewModelFactory
 
 class WeatherModule(
@@ -15,7 +16,9 @@ class WeatherModule(
     private fun provideGetCurrentWeatherUseCase(): GetCurrentWeatherUseCase {
         return GetCurrentWeatherUseCase(appContainer.weatherRepository)
     }
-
+    private fun provideGetForecastUseCase(): GetForecastUseCase {
+        return GetForecastUseCase(appContainer.weatherRepository)
+    }
     private fun provideCheckFrostAlertUseCase(): CheckFrostAlertUseCase {
         return CheckFrostAlertUseCase()
     }
@@ -28,9 +31,12 @@ class WeatherModule(
         return CalculateIrrigationUseCase()
     }
 
+
+
     fun provideWeatherViewModelFactory(): WeatherViewModelFactory {
         return WeatherViewModelFactory(
             getCurrentWeatherUseCase = provideGetCurrentWeatherUseCase(),
+            getForecastUseCase = provideGetForecastUseCase(),
             checkFrostAlertUseCase = provideCheckFrostAlertUseCase(),
             checkWindAlertUseCase = provideCheckWindAlertUseCase(),
             calculateIrrigationUseCase = provideCalculateIrrigationUseCase()

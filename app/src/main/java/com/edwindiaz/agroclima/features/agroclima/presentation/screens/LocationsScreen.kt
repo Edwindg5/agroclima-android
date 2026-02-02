@@ -1,6 +1,6 @@
+//features/agroclima/presentation/screens/LocationsScreen.kt
 package com.edwindiaz.agroclima.features.agroclima.presentation.screens
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -9,20 +9,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.edwindiaz.agroclima.features.agroclima.domain.entities.ChiapasLocations
+import com.edwindiaz.agroclima.features.agroclima.data.datasources.local.ChiapasLocations
 import com.edwindiaz.agroclima.features.agroclima.domain.entities.Location
 import com.edwindiaz.agroclima.features.agroclima.presentation.viewmodels.WeatherViewModel
-import com.edwindiaz.agroclima.features.agroclima.presentation.viewmodels.WeatherViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LocationsScreen(
-    factory: WeatherViewModelFactory,
+    viewModel: WeatherViewModel,
     onNavigateBack: () -> Unit
 ) {
-    val viewModel: WeatherViewModel = viewModel(factory = factory)
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -63,16 +59,17 @@ fun LocationsScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LocationCard(
     location: Location,
     onClick: () -> Unit
 ) {
-    Card(
+    ElevatedCard(
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 4.dp)
-            .clickable { onClick() },
+            .padding(horizontal = 16.dp, vertical = 4.dp),
         shape = androidx.compose.foundation.shape.RoundedCornerShape(12.dp)
     ) {
         Column(
